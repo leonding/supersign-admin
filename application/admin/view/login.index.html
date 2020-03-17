@@ -17,17 +17,6 @@
 
     <!-- 顶部导航条 开始 -->
     <div class="header">
-        <span class="title notselect">
-            欢迎登录 {:sysconf('app_name')} 后台管理 <sup>{:sysconf('app_version')}</sup>
-        </span>
-        <ul>
-            <!--<li class="notselect"><a href="javascript:void(0)" target="_blank">帮助</a></li>-->
-            <li class="notselect">
-                <a href="http://sw.bos.baidu.com/sw-search-sp/software/4bcf5e4f1835b/ChromeStandalone_54.0.2840.99_Setup.exe">
-                    <b>推荐使用谷歌浏览器</b>
-                </a>
-            </li>
-        </ul>
     </div>
     <!-- 顶部导航条 结束 -->
 
@@ -35,11 +24,6 @@
     <div class="container" style="top:50%;margin-top:-300px">
         <form onsubmit="return false;" data-time="0.001" data-auto="true" method="post"
               class="content layui-form animated fadeInDown">
-            <div class="people">
-                <div class="tou"></div>
-                <div id="left-hander" class="initial_left_hand transition"></div>
-                <div id="right-hander" class="initial_right_hand transition"></div>
-            </div>
             <ul>
                 <li>
                     <input name='username' class="hide"/>
@@ -55,18 +39,17 @@
                 </li>
                 <li class="text-center">
                     <button type="submit" class="layui-btn layui-disabled" data-form-loaded="立 即 登 入">正 在 载 入</button>
-                    <!--<a style="position:absolute;display:block;right:0" href="javascript:void(0)">忘记密码？</a>-->
+                    <!-- <a style="position:absolute;display:block;right:0" href="javascript:void(0)">忘记密码？</a> -->
+                    <p>
+                        <a data-href="{:url('@admin/register')}" class="fl">立即注册</a>
+                        <a href="" class="fr">忘记密码?</a>
+                    </p>
                 </li>
             </ul>
+
         </form>
     </div>
     <!-- 页面表单主体 结束 -->
-
-    <!-- 底部版权信息 开始 -->
-    {if sysconf('site_copy')}
-    <div class="footer notselect">{:sysconf('site_copy')}</div>
-    {/if}
-    <!-- 底部版本信息 结束 -->
 
 </div>
 {/block}

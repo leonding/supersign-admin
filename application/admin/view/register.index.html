@@ -1,0 +1,61 @@
+{extend name="extra@admin/main"}
+
+{block name="style"}
+<link rel="stylesheet" href="__STATIC__/theme/default/css/login.css">
+{/block}
+
+{block name="body"}
+<div class="login-container full-height">
+
+    <!-- 动态云层动画 开始 -->
+    <div class="clouds-container">
+        <div class="clouds clouds-footer"></div>
+        <div class="clouds"></div>
+        <div class="clouds clouds-fast"></div>
+    </div>
+    <!-- 动态云层动画 结束 -->
+
+    <!-- 顶部导航条 开始 -->
+    <div class="header">
+    </div>
+    <!-- 顶部导航条 结束 -->
+
+    <!-- 页面表单主体 开始 -->
+    <div class="container" style="top:50%;margin-top:-300px">
+        <form onsubmit="return false;" data-time="0.001" data-auto="true" method="post"
+              class="content layui-form animated fadeInDown">
+            <ul>
+                <li>
+                    <input name='username' class="hide"/>
+                    <input required="required" pattern="^\S{4,}$" value="" name="username"
+                           autofocus="autofocus" autocomplete="off" class="login-input username"
+                           title="请输入4位及以上的字符" placeholder="请输入用户名/手机号码"/>
+                </li>
+                <li>
+                    <input name='password' class="hide"/>
+                    <input required="required" pattern="^\S{4,}$" value="" name="password"
+                           type="password" autocomplete="off" class="login-input password"
+                           title="请输入4位及以上的字符" placeholder="请输入密码"/>
+                </li>
+                <li class="text-center">
+                    <button type="submit" class="layui-btn layui-disabled" data-form-loaded="注 册">正 在 载 入</button>
+                    <p>
+                        <a data-href="{:url('@admin/login')}" class="fl">已有账号？立即登录</a>
+                    </p>
+                </li>
+            </ul>
+        </form>
+    </div>
+    <!-- 页面表单主体 结束 -->
+
+</div>
+{/block}
+
+{block name="script"}
+<script>
+    if (window.location.href.indexOf('#') > -1) {
+        window.location.href = window.location.href.split('#')[0];
+    }
+
+</script>
+{/block}
