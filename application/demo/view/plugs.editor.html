@@ -2,46 +2,95 @@
 
 {block name="content"}
 
-<!--<div class="code">-->
+<!-- <div class="code"> -->
     <!--<blockquote class="site-text layui-elem-quote">-->
         <!--富文本编辑器-->
     <!--</blockquote>-->
-    <div style="position:relative">
-        <textarea name="content">这里可以放默认值</textarea>
-        <script>
-            require(['ckeditor'], function () {
-                var editor = window.createEditor('[name="content"]');
-                // 设置内容
-                editor.setData('修改内容');
-                // 获取内容
-                var content = editor.getData();
-                console.log(content);
-            });
-        </script>
+
+<!-- </div> -->
+<div class="layui-upload-drag" id="test10" style="width:100%;height:400px;display:flex;flex-direction: column;align-items: center;justify-content: center;">
+    <div>
+        <i class="layui-icon"></i>
     </div>
-
-    <pre class="layui-code" lay-title="HTML代码">
-
-<textarea name="content">这里可以放默认值</textarea>
-    </pre>
-
-    <pre class="layui-code" lay-title="javascript代码">
-
-require(['ckeditor'], function () {
-    var editor = window.createEditor('[name="content"]');
-    // 设置内容
-    editor.setData('修改内容');
-    // 获取内容
-    var content = editor.getData();
-    console.log(content);
-});
-
-    </pre>
+    <p style="color: #333;font-size: 13px;">点击按钮选择应用的安装包，或拖拽文件到此区域</p>
+    <p style="font-size: 12px;">（支持ipa文件）</p>
+    <!-- <div class="layui-hide" id="uploadDemoView">
+      <hr>
+      <img src="" alt="上传成功后渲染" style="max-width: 196px">
+    </div> -->
 </div>
 
+<!-- <script src="__STATIC__/plugs/layui/layui.js"></script>  -->
 <script>
-    layui.use('code', function () {
-        layui.code({encode: true});
+    // layui.use('code', function () {
+    //     layui.code({encode: true});
+    // });
+    //拖拽上传
+
+    layui.use('upload', function(){
+    var $ = layui.jquery
+    ,upload = layui.upload;
+    upload.render({
+        elem: '#test10'
+        ,url: "{:url('demo/plugs/upload')}" //改成您自己的上传接口
+        ,accept: 'file'
+        ,exts:"ipa"
+        ,size: 520000
+        ,auto: true
+        ,before: function(obj){
+            obj.preview(function(index, file, result){
+                console.log(file.name);
+                console.log(file.type);
+                console.log(file.size);
+                // console.log(result);
+                //显示进度条
+            });
+        }
+        ,progress: function(n, elem){
+            var percent = n + '%' //获取进度百分比
+            //以下系 layui 2.5.6 新增
+            console.log("====>"+percent); 
+            //更新进度条
+        }
+        ,done: function(res){
+            if (res.code > 0){
+                layer.msg('上传成功');
+            }
+            // layui.$('#uploadDemoView').removeClass('layui-hide').find('img').attr('src', res.files.file);
+            // console.log(res);
+        }
+        ,error: function(){
+			//演示失败状态，并实现重传
+			layer.msg('上传错误');
+		}
+    });
+
+        //普通图片上传
+        // var uploadInst = upload.render({
+        //     elem: '#test1'
+        //     ,url: 'https://httpbin.org/post' //改成您自己的上传接口
+        //     ,before: function(obj){
+        //     //预读本地文件示例，不支持ie8
+        //     obj.preview(function(index, file, result){
+        //         $('#demo1').attr('src', result); //图片链接（base64）
+        //     });
+        //     }
+        //     ,done: function(res){
+        //     //如果上传失败
+        //     if(res.code > 0){
+        //         return layer.msg('上传失败');
+        //     }
+        //     //上传成功
+        //     }
+        //     ,error: function(){
+        //     //演示失败状态，并实现重传
+        //     var demoText = $('#demoText');
+        //     demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
+        //     demoText.find('.demo-reload').on('click', function(){
+        //         uploadInst.upload();
+        //     });
+        //     }
+        // });
     });
 </script>
 {/block}

@@ -75,9 +75,9 @@ INSERT INTO `system_config` VALUES ('167', 'storage_qiniu_domain', 'static.ctolo
 INSERT INTO `system_config` VALUES ('168', 'storage_qiniu_access_key', 'OAFHGzCgZjod2-s4xr-g5ptkXsNbxDO_t2fozIEC');
 INSERT INTO `system_config` VALUES ('169', 'storage_qiniu_secret_key', 'gy0aYdSFMSayQ4kMkgUeEeJRLThVjLpUJoPFxd-Z');
 INSERT INTO `system_config` VALUES ('170', 'storage_qiniu_region', '华东');
-INSERT INTO `system_config` VALUES ('173', 'app_name', 'ThinkAdmin');
+INSERT INTO `system_config` VALUES ('173', 'app_name', '巨友互动');
 INSERT INTO `system_config` VALUES ('174', 'app_version', '2.00 dev');
-INSERT INTO `system_config` VALUES ('176', 'browser_icon', 'https://think.ctolog.com/static/upload/f47b8fe06e38ae99/08e8398da45583b9.png');
+INSERT INTO `system_config` VALUES ('176', 'browser_icon', 'https://www.baidu.com/img/baidu_resultlogo@2.png');
 INSERT INTO `system_config` VALUES ('184', 'wechat_appid', 'wx60a43dd8161666d4');
 INSERT INTO `system_config` VALUES ('185', 'wechat_appsecret', '062938ddcfe0d69786e4e3d9dcbb08aa');
 INSERT INTO `system_config` VALUES ('186', 'wechat_token', 'mytoken');
@@ -162,13 +162,14 @@ INSERT INTO `system_menu` VALUES ('82', '61', '素材资源管理', '', '', '#',
 INSERT INTO `system_menu` VALUES ('83', '82', '添加图文', '', 'fa fa-folder-open-o', 'wechat/news/add?id=1', '', '_self', '20', '1', '0', '2017-04-24 11:23:40');
 INSERT INTO `system_menu` VALUES ('85', '82', '图文列表', '', 'fa fa-file-pdf-o', 'wechat/news/index', '', '_self', '10', '1', '0', '2017-04-24 11:25:45');
 INSERT INTO `system_menu` VALUES ('86', '65', '粉丝黑名单', '', 'fa fa-reddit-alien', 'wechat/fans/back', '', '_self', '30', '1', '0', '2017-05-05 16:17:03');
-INSERT INTO `system_menu` VALUES ('87', '0', '插件案例', '', '', '#', '', '_self', '3000', '1', '0', '2017-07-10 15:10:16');
-INSERT INTO `system_menu` VALUES ('88', '87', '第三方插件', '', '', '#', '', '_self', '0', '1', '0', '2017-07-10 15:10:37');
-INSERT INTO `system_menu` VALUES ('90', '88', 'PCAS 省市区', '', '', 'demo/plugs/region', '', '_self', '0', '1', '0', '2017-07-10 18:45:47');
-INSERT INTO `system_menu` VALUES ('91', '87', '内置插件', '', '', '#', '', '_self', '0', '1', '0', '2017-07-10 18:56:59');
+INSERT INTO `system_menu` VALUES ('87', '0', '签名管理', '', '', '#', '', '_self', '3000', '1', '0', '2017-07-10 15:10:16');
+INSERT INTO `system_menu` VALUES ('88', '87', '超级签名', '', '', '#', '', '_self', '0', '1', '0', '2017-07-10 15:10:37');
+INSERT INTO `system_menu` VALUES ('90', '88', '总览', '', '', 'demo/plugs/region', '', '_self', '0', '1', '0', '2017-07-10 18:45:47');
+INSERT INTO `system_menu` VALUES ('91', '87', '企业签名', '', '', '#', '', '_self', '0', '1', '0', '2017-07-10 18:56:59');
 INSERT INTO `system_menu` VALUES ('92', '91', '文件上传', '', '', 'demo/plugs/file', '', '_self', '0', '1', '0', '2017-07-10 18:57:22');
-INSERT INTO `system_menu` VALUES ('93', '88', '富文本编辑器', '', '', 'demo/plugs/editor', '', '_self', '0', '1', '0', '2017-07-28 15:19:44');
+INSERT INTO `system_menu` VALUES ('93', '88', '发布应用', '', '', 'demo/plugs/editor', '', '_self', '0', '1', '0', '2017-07-28 15:19:44');
 INSERT INTO `system_menu` VALUES ('94', '0', '后台首页', '', '', 'admin/index/main', '', '_self', '0', '1', '0', '2017-08-08 11:28:43');
+INSERT INTO `system_menu` VALUES ('95', '88', '私有账号池', '', '', 'demo/plugs/private', '', '_self', '0', '1', '0', '2017-08-08 11:28:43');
 
 -- ----------------------------
 -- Table structure for system_node

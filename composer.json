@@ -25,7 +25,8 @@
     "topthink/think-mongo": "1.1.*",
     "topthink/think-queue": "1.0.*",
     "endroid/qr-code": "^1.9",
-    "aliyuncs/oss-sdk-php": "^2.2"
+    "aliyuncs/oss-sdk-php": "^2.2",
+    "rodneyrehm/plist": "^2.0"
   },
   "extra": {
     "think-path": "thinkphp"
