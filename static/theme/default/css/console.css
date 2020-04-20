@@ -218,3 +218,10 @@ input[type=checkbox]:focus,input[type=radio]:focus{outline:none}
 
 
 .app-list {display: block;margin-bottom: 20px;font-size: 16px;}
+
+/** 私有账号池 */
+.text-wrap {display: block;padding: 35px;background: #eaedf1;}
+.text-wrap .red {color: #ed1d1d;font-weight: 700;}
+.layui-form-label:before {content: "*";color: #f56c6c;margin-right: 4px;}
+.add-main {margin-top: 40px;}
+.msgHtml_con {padding: 20px 20px 0 20px;font-size: 14px;color: #333;}

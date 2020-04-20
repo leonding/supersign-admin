@@ -20,6 +20,13 @@
     </div> -->
 </div>
 
+<div class="layui-hide" id="progressBar" style="width: 100%; height: 400px;border: 1px dashed #e2e2e2; display:flex;flex-direction: column;align-items: center;justify-content: center;">
+    <div class="layui-progress layui-progress-big " style="width:100%" lay-filter="progressBar" lay-showPercent="true">
+        <div class="layui-progress-bar layui-bg-blue" lay-percent="40%"></div>
+    </div>
+</div>
+   
+
 <!-- <script src="__STATIC__/plugs/layui/layui.js"></script>  -->
 <script>
     // layui.use('code', function () {
@@ -27,9 +34,10 @@
     // });
     //拖拽上传
 
-    layui.use('upload', function(){
+    layui.use(['upload', 'element'], function(){
     var $ = layui.jquery
-    ,upload = layui.upload;
+    ,upload = layui.upload
+    ,element = layui.element;
     upload.render({
         elem: '#test10'
         ,url: "{:url('demo/plugs/upload')}" //改成您自己的上传接口
@@ -44,20 +52,24 @@
                 console.log(file.size);
                 // console.log(result);
                 //显示进度条
+                layui.$('#test10').addClass('layui-hide');
+                layui.$('#progressBar').removeClass('layui-hide');
             });
         }
         ,progress: function(n, elem){
             var percent = n + '%' //获取进度百分比
             //以下系 layui 2.5.6 新增
-            console.log("====>"+percent); 
+            // console.log("====>"+percent); 
             //更新进度条
+            element.progress('progressBar', percent);
         }
         ,done: function(res){
             if (res.code > 0){
                 layer.msg('上传成功');
             }
-            // layui.$('#uploadDemoView').removeClass('layui-hide').find('img').attr('src', res.files.file);
             // console.log(res);
+            layui.$('#test10').removeClass('layui-hide');
+            layui.$('#progressBar').addClass('layui-hide');
         }
         ,error: function(){
 			//演示失败状态，并实现重传

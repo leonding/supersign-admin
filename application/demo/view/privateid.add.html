@@ -1,0 +1,131 @@
+{extend name='extra@admin/content'}
+
+{block name="content"}
+
+<div class="center">
+    <span class="text-wrap">
+        【添加前请注意】：<br>
+        1. 每个开发者账号最多能创建两本证书，请在添加账号前，进入苹果开发者网站，<span class="red">确保账号内没有任何证书</span>，即第一个证书为我们所用，否则用户无法正常使用安装您的 App！<br>
+        2. 添加后，系统会自动创建证书、设备UDID和描述文件，<span  class="red">请勿在苹果开发者网站里删除或修改这些文件，否则会导致用户安装的软件闪退或无法安装！</span><br>
+        3. 如果开发者账号双重认证的设备不在身边，请将设备解绑，用手机SIM卡接收认证短信，否则无法正常进行账号认证！<br>
+        4. 当私有池账号添加成功后， <span class="red">请勿修改该账号的任何信息（包括但不限于账号名、密码、手机号、邮箱）</span>，一旦修改，将会导致账号无法正常使用，以及影响已经安装 App 的用户。<br>
+        5. 当私有池账号添加成功后， <span class="red">请勿将该账号用于 iOS 开发、上架等任何用途</span>，否则将导致账号无法正常使用，以及影响已经安装 App 的用户。<br> <br>
+        申请开发者账号小知识：<br>
+        申请苹果个人开发者账号时，请不要使用同一张信用卡用于支付多个账号订单，否则容易导致封号
+    </span>
+ 
+</div>
+
+<div class="add-main">
+    <form class="layui-form">
+        <div class="layui-form-item">
+            <label for="username" class="layui-form-label" style="width: 80px;">账号：</label>
+            <div class="layui-input-inline" style="width: 300px;">
+                <input type="text" name="username" lay-verify="email" placeholder="请输入账号" autocomplete="off" class="layui-input">
+            </div>
+        </div> 
+        <div class="layui-form-item">
+            <label for="password" class="layui-form-label" style="width: 80px;">密码：</label>
+            <div class="layui-input-inline" style="width: 300px;">
+                <input type="text" name="password" lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+            </div>
+        </div> 
+        <div class="layui-input-block">
+            <button type="submit" class="layui-btn layui-btn-small" lay-submit="add" lay-filter="add">添加</button>
+            <button type="back" class="layui-btn layui-btn-primary layui-btn-small">返回列表</button>
+        </div>
+    </form>
+</div>
+
+<script type="text/html" id="msgHtml">
+    <div class="msgHtml_con">
+        <input type="text" name="msgcode" placeholder="请输入短信验证码" autocomplete="off" class="layui-input">
+    </div>
+</script>
+
+<script>
+    layui.use(['form','layer','jquery','laytpl'], function () {
+    
+        // 操作对象
+        var form = layui.form;
+        var $ = layui.jquery;
+        var layer = layui.layer;
+        var laytpl = layui.laytpl;
+    
+        var setMsgCodeUrl = '{:url("demo/privateid/msgcode")}';
+        //自定义验证规则  
+        form.verify({  
+             email: [/^[a-z0-9._%-]+@([a-z0-9-]+\.)+[a-z]{2,4}$|^1[3|4|5|7|8]\d{9}$/, '邮箱格式不对']  
+        });  
+
+        form.on('submit(add)',function (data) {
+            // console.log(data.field);
+            $.ajax({
+                url:'{:url("demo/privateid/addacut")}',
+                data:data.field,
+                dataType:'text',
+                type:'post',
+                success:function (data) {
+                    var data=eval("("+data+")");//转换为json对象
+                    if (data.status == 1){
+                        laytpl($("#msgHtml").html()).render({}, function(html) {
+                            layer.open({
+                                type: 1,
+                                title: "短信验证码",
+                                area: '300px',
+                                closeBtn: false,
+                                shade: .3,
+                                btn: ["确定"],
+                                btnAlign: 'c',
+                                content: html,
+                                yes: function(index, layero) {
+                                    var ajaxData = {};
+                                    ajaxData.id = data.id;
+                                    ajaxData.msgcode = $("input[name='msgcode']").val();
+                                    if (ajaxData.msgcode == "") {
+                                        layer.msg("请输入短信验证码", {
+                                            time: 1000
+                                        });
+                                        return false
+                                    }
+                                    layer.close(index);
+                                    tool.httpRequest(setMsgCodeUrl, ajaxData, 'post', layer, true, '处理中...', function(data) {
+                                        // layer.msg(data.msg, {
+                                        //     time: 2000,
+                                        //     icon: 1,
+                                        // }, function() {
+                                        //     // window.location.href = jumpUrl
+                                        // })
+                                    })
+                                    var interval;
+                                    function checkaccount() {
+                                        $.ajax({
+                                            url: '{:url("demo/privateid/checkaccount")}',
+                                            async:true,
+                                            type: 'post',
+                                            success: function (data) {
+                                                if(data == true){
+                                                    alert("账号添加成功");
+                                                    clearInterval(interval);
+                                                }
+                                            }
+                                        })
+                                    }
+                                    interval = setInterval(checkaccount,500);
+                                },
+                            })
+                            return false;
+                        })
+                    }else{
+                        layer.msg('账号或密码错误');
+                    }
+
+                }
+            })
+            return false;
+        })
+    });  
+
+
+</script>
+{/block}

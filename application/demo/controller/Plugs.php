@@ -48,12 +48,21 @@ class Plugs extends Controller
     }
 
     /**
-     * 应用上传
+     * 发布应用
      * @return \think\response\View
      */
     public function editor()
     {
         return view('', ['title' => '应用上传']);
+    }
+
+    /**
+     * 私有账号池
+     * @return \think\response\View
+     */
+    public function private()
+    {
+        return view('', ['title' => '私有账号池']);
     }
 
     public function upload()
@@ -138,5 +147,9 @@ class Plugs extends Controller
         $total = Db::name('AdminApp')->count();
         $res = ['code'=>0,'msg'=>'','count'=>$total,'data'=>$appinfo];
         return json($res);
+    }
+
+    public function private_add(){
+        return view('plugs.private.add', ['title' => '私有账号池']);
     }
 }
